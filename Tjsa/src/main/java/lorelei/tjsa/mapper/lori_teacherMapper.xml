@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lorelei.tjsa.service.lori_teacherMapper">
+	<resultMap id="BaseResultMap"
+		type="lorelei.tjsa.model.lori_teacher">
+		<id column="TeacherNO" jdbcType="INTEGER" property="teacherno" />
+		<result column="TeacherName" jdbcType="VARCHAR"
+			property="teachername" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TeacherNO, TeacherName
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teacher
+		where TeacherNO = #{teacherno,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from teacher
+		where TeacherNO =
+		#{teacherno,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="lorelei.tjsa.model.lori_teacher">
+		insert into teacher (TeacherNO, TeacherName)
+		values
+		(#{teacherno,jdbcType=INTEGER}, #{teachername,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="lorelei.tjsa.model.lori_teacher">
+		insert into teacher
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="teacherno != null">
+				TeacherNO,
+			</if>
+			<if test="teachername != null">
+				TeacherName,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="teacherno != null">
+				#{teacherno,jdbcType=INTEGER},
+			</if>
+			<if test="teachername != null">
+				#{teachername,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="lorelei.tjsa.model.lori_teacher">
+		update teacher
+		<set>
+			<if test="teachername != null">
+				TeacherName = #{teachername,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where TeacherNO = #{teacherno,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="lorelei.tjsa.model.lori_teacher">
+		update teacher
+		set TeacherName =
+		#{teachername,jdbcType=VARCHAR}
+		where TeacherNO =
+		#{teacherno,jdbcType=INTEGER}
+	</update>
+</mapper>

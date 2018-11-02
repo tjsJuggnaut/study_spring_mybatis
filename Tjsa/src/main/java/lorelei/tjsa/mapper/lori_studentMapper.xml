@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lorelei.tjsa.service.lori_studentMapper">
+	<resultMap id="BaseResultMap"
+		type="lorelei.tjsa.model.lori_student">
+		<id column="StuNO" jdbcType="INTEGER" property="stuno" />
+		<result column="Sname" jdbcType="VARCHAR" property="sname" />
+		<result column="Sage" jdbcType="INTEGER" property="sage" />
+		<result column="Ssex" jdbcType="VARCHAR" property="ssex" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		StuNO, Sname, Sage, Ssex
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from student
+		where StuNO = #{stuno,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from student
+		where StuNO = #{stuno,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="lorelei.tjsa.model.lori_student">
+		insert into student (StuNO, Sname, Sage,
+		Ssex)
+		values (#{stuno,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR},
+		#{sage,jdbcType=INTEGER},
+		#{ssex,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="lorelei.tjsa.model.lori_student">
+		insert into student
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="stuno != null">
+				StuNO,
+			</if>
+			<if test="sname != null">
+				Sname,
+			</if>
+			<if test="sage != null">
+				Sage,
+			</if>
+			<if test="ssex != null">
+				Ssex,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="stuno != null">
+				#{stuno,jdbcType=INTEGER},
+			</if>
+			<if test="sname != null">
+				#{sname,jdbcType=VARCHAR},
+			</if>
+			<if test="sage != null">
+				#{sage,jdbcType=INTEGER},
+			</if>
+			<if test="ssex != null">
+				#{ssex,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="lorelei.tjsa.model.lori_student">
+		update student
+		<set>
+			<if test="sname != null">
+				Sname = #{sname,jdbcType=VARCHAR},
+			</if>
+			<if test="sage != null">
+				Sage = #{sage,jdbcType=INTEGER},
+			</if>
+			<if test="ssex != null">
+				Ssex = #{ssex,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where StuNO = #{stuno,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="lorelei.tjsa.model.lori_student">
+		update student
+		set Sname = #{sname,jdbcType=VARCHAR},
+		Sage = #{sage,jdbcType=INTEGER},
+		Ssex = #{ssex,jdbcType=VARCHAR}
+		where StuNO = #{stuno,jdbcType=INTEGER}
+	</update>
+</mapper>
