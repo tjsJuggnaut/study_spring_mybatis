@@ -14,12 +14,12 @@ public class lori_scoreMapperIm implements lori_scoreMapper {
 	private lori_scoreMapper lsm;
 
 	//implements a interface usually use the @Override
-	@Override
+
 	public int insert(lori_score record) {
 		return lsm.insert(record);
 	}
 
-	@Override
+
 	public int insertSelective(lori_score record) {
 		return lsm.insertSelective(record);
 	}
